@@ -1,7 +1,7 @@
 @extends('layouts.app')
-  
+
 @section('content')
-   <div class="container">
+   <div class="container bg-light p-4">
         <div class="row">
             <div class="col-lg-12 margin-tb">
                 <div class="pull-left">
@@ -38,7 +38,7 @@
                         {{ $person->floor_no }}nd floor, Room No. <strong>{{ $person->house_no }}</strong>; <br> {{ $person->street }} St. {{ $person->barangay }}, {{ $person->city }} <br>
                     @elseif($person->floor_no=='3')
                         {{ $person->floor_no }}rd floor, Room No. <strong>{{ $person->house_no }}</strong>; <br> {{ $person->street }} St. {{ $person->barangay }}, {{ $person->city }} <br>
-                    @else   
+                    @else
                         {{ $person->floor_no }}th floor, Room No. <strong>{{ $person->house_no }}</strong>; <br> {{ $person->street }} St. {{ $person->barangay }}, {{ $person->city }} <br>
                     @endif
                 @endif

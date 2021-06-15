@@ -1,0 +1,190 @@
+#bg-wp{
+    background-image: url("/image/heart_building.jpg");
+}
+
+
+/* This is CSS for Employee Registration */
+#regis_head{
+    text-align: center;
+    margin-bottom: 3%;
+}
+
+#regis_field{
+    padding: 1%;
+    border-radius: 7px;
+    border: 2px solid grey;
+    /* box-sizing: border-box; */
+    /* border-style: inset; */
+}
+
+#regis_con_name{
+    margin-top: 1%;
+
+}
+
+#regis_con{
+    margin-top: 5%;
+    padding-top: 3%;
+    border-top: 1px solid grey;
+}
+
+#btn_regis{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    padding-left: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 10%;
+    text-align: center;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+    width:40%;
+
+}
+
+#regis_btn_gen{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    padding-left: 15%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 15%;
+    background-color: rgb(245, 138, 77);
+    text-align: center;
+    color: white;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#regis_btns{
+    margin-top: 2%;
+}
+
+#regis_btn{
+    margin-top: 3%;
+}
+
+#btn_regis_form{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    padding-left: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 10%;
+    text-align: center;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+    width:40%;
+}
+
+#btn_return_form{
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif ;
+    padding-left: 10%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-right: 10%;
+    text-align: center;
+    border: 0px;
+    border-radius: 5px;
+    font-weight: bold;
+    display: block;
+    width:40%;
+}
+
+/* end of registration css */
+
+input[type=text]{
+    background-color: rgb(228, 253, 234);
+    color:rgb(0, 0, 0);
+}
+
+/* homepage css */
+#home_crud{
+    margin-top: 2%;
+    margin-bottom: 2%;
+    width: 100%;
+}
+
+#home_table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+#home_table tr:hover{
+    background-color: #ddd;
+}
+
+#home_table th{
+background-color: #b6f5b8;
+    
+}
+
+#home_crud_btns{
+    padding-left: 15%;
+}
+
+#card_some{
+    object-position: center;
+}
+
+/* end of homepage css */
+
+
+/* scan css */
+
+#s_field{
+    border-radius: 5px;
+    padding: 1%;
+    border-color: white;
+    width: 90%;
+}
+
+#s_box{
+    text-align: center;
+    padding: 5%;
+    /* background-color: blueviolet; */
+}
+
+#s_search{
+    width: 100%;
+}
+
+#s_bh{
+    width: 80%;
+}
+
+.s_table{
+    text-align: center;
+    width: 90%;
+}
+
+.s_result{
+    padding: 2%;
+    border-radius: 1px;
+}
+
+#s_img{
+    padding: 3%;
+}
+
+#s_container{
+    text-align: center;
+}
+/* end of scan css */
+
+/* login border color  */
+#c_color{
+    border-color: grey;
+}
+
+/* login header color  */
+#h_color{
+    background-color: rgb(252, 93, 93);
+    color: white;
+}
+
+#l_color{
+    background-color: rgba(255, 255, 255, 0.3);
+}

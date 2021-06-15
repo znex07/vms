@@ -1,0 +1,28 @@
+#boody{
+    /* background-color: rgb(255, 103, 103); */
+    background-image: url("/image/heart_building.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+/* login position */
+#bg-wp{
+    margin-top: 15%;
+    float: center;
+}
+
+/* login border color  */
+#c_color{
+    border-color: grey;
+}
+
+/* login header color  */
+#h_color{
+    background-color: rgb(252, 93, 93);
+    color: white;
+}
+
+#l_color{
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+

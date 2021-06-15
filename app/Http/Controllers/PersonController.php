@@ -65,7 +65,8 @@ class PersonController extends Controller
             'barangay' => 'required',
             'contact_no' => 'required',
             'city' => 'required',
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:persons'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:person'],
+            'rf_id' => ['required', 'string', 'max:255', 'unique:person'],
             'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
         $name = $request->file('image')->getClientOriginalName();

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container" >
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -45,7 +45,7 @@
                 @csrf
                 {{-- the id used here are from the public/css/regis_item.css; if you can change or add css there. --}}
                 <br>
-                <div class="container">
+                <div class="container  d-flex justify-content-center">
 
                     <div class="row">
                         <div class="col-md-6">
@@ -61,8 +61,8 @@
                             <div class="form-group float-left">
                                 <label for="level">Category:</label>
                                 <select id="level" name="level">
-                                    <option value="visitor" selected >Visitor</option>
-                                    <option value="tenant">Tenant</option>
+                                    <option value="visitor">Visitor</option>
+                                    <option value="tenant" selected>Tenant</option>
                                     <option value="employee">Employee</option>
                                     <option value="admin">Administrator</option>
                                 </select>
@@ -74,13 +74,13 @@
                     <h5 id="regis_head">Complete Name</h5>
                     <div class="row">
                         <div class="col">
-                            <input type="text" placeholder="Lastname" name="last_name" id="regis_field"><br>
+                            <input type="text" placeholder="Lastname" name="last_name" id="regis_field" value="{{old('last_name')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="Firstname" name="first_name" id="regis_field"><br>
+                            <input type="text" placeholder="Firstname" name="first_name" id="regis_field" value="{{old('first_name')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="Middlename" name="middle_name" id="regis_field"><br>
+                            <input type="text" placeholder="Middlename" name="middle_name" id="regis_field" value="{{old('middle_name')}}"><br>
                         </div>
                     </div>
                 </div>
@@ -88,23 +88,23 @@
                     <h5 id="regis_head">Full Address</h5>
                     <div class="row">
                         <div class="col">
-                            <input type="text" placeholder="Floor No." name="floor_no" id="regis_field"><br>
+                            <input type="text" placeholder="Floor No." name="floor_no" id="regis_field" value="{{old('floor_no')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="House/Room No." name="house_no" id="regis_field"><br>
+                            <input type="text" placeholder="House/Room No." name="house_no" id="regis_field" value="{{old('house_no')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="Street" name="street" id="regis_field"><br>
+                            <input type="text" placeholder="Street" name="street" id="regis_field" value="{{old('street')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="Barangay" name="barangay" id="regis_field"><br>
+                            <input type="text" placeholder="Barangay" name="barangay" id="regis_field" value="{{old('barangay')}}"><br>
                         </div>
                     </div> <br>
                     <div class="row">
                         <div class="col">
                         </div>
                         <div class="col-4">
-                            <input type="text" placeholder="City" name="city" id="regis_field"><br>
+                            <input type="text" placeholder="City" name="city" id="regis_field" value="{{old('city')}}"><br>
                         </div>
                         <div class="col">
                         </div>
@@ -114,19 +114,19 @@
                     <h5 id="regis_head">Contact Number</h5>
                     <div class="row">
                         <div class="col">
-                            <input type="text" placeholder="Phone Number" name="contact_no" id="regis_field"><br>
+                            <input type="text" placeholder="Phone Number" name="contact_no" id="regis_field" value="{{old('contact_no')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="Email" name="email" id="regis_field"><br>
+                            <input type="text" placeholder="Email" name="email" id="regis_field" value="{{old('email')}}"><br>
                         </div>
                         <div class="col">
-                            <input type="text" placeholder="RFID" name="rf_id" id="regis_field"><br>
+                            <input type="text" placeholder="RFID" name="rf_id" id="regis_field" value="{{old('rf_id')}}"><br>
                         </div>
                     </div>
                 </div>
                 <br><br>
                 <div class="container" id="regis_btns">
-                <div class="row justify-content-center"id="regis_btn">
+                <div class="row justify-content-center card-footer"id="regis_btn">
                     <button type="submit" name="btn-regis" class="btn btn-success" id="btn_regis_form" >REGISTER</button><br>
                 </div>
                 </div>

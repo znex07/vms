@@ -32,7 +32,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <img src="/image/icon.jpg" style="height: 40px; width: 40px" class="img-thumbnail rounded-circle" alt="" srcset="">
+                <a class="navbar-brand " href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Building Management System') }} --}}
                     Visitor Management System
                 </a>
@@ -54,7 +55,7 @@
                                     <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
                                 </li>
                             @endif
-                            
+
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
@@ -84,7 +85,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-4" style="background-image: url('/image/bg.jpg'); background-repeat: no-repeat; background-size: cover">
             @yield('content')
         </main>
     </div>

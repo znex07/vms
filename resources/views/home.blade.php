@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h4>Welcome back, {{ Auth::user()->name }}</h4>
+    <h4>Welcome back, {{ Auth::user()->name }} !</h4>
 </div>
 <br><br><br>
 <div class="container">
@@ -42,8 +42,8 @@
                     </div>
             </div>
 
-        </div>    
-    </div>    
+        </div>
+    </div>
 </div>
 
 @endsection

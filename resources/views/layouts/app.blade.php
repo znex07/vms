@@ -35,7 +35,8 @@
                 <img src="/image/icon.jpg" style="height: 40px; width: 40px" class="img-thumbnail rounded-circle" alt="" srcset="">
                 <a class="navbar-brand " href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Building Management System') }} --}}
-                    Visitor Management System
+                    {{-- Visitor Management System --}}
+                    <h3 class="px-2 mt-1">Heart Dorm</h3>
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>

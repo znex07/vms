@@ -1,12 +1,12 @@
 @extends('layouts.app')
-  
+
 @section('content')
 <div class="container">
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
                 {{-- insert header here if you want --}}
-            </div> 
+            </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
             </div>
@@ -40,21 +40,37 @@
             {{-- this one is the card header --}}
             <div class="card-header"> <strong>REGISTRATION</strong></div>
             {{-- this will go to the Controller, check the web.php --}}
-            <form action="{{ route('persons.store') }}" method="POST">
+            <form action="{{ route('persons.store') }}" method="POST" enctype="multipart/form-data">
                 {{-- always add csrf in every form or even filling up data --}}
                 @csrf
                 {{-- the id used here are from the public/css/regis_item.css; if you can change or add css there. --}}
                 <br>
-                <div class="container" id="regis_con_name">
-                    <label for="level">Category:</label>
-                    <select id="level" name="level">
-                        <option value="visitor" selected >Visitor</option>
-                        <option value="tenant">Tenant</option>
-                        <option value="employee">Employee</option>
-                        <option value="admin">Administrator</option>
-                    </select>
-                </div> 
-                <div class="container" id="regis_con">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <img src="/image/pic/default.png" alt="" id="profile_pic" style="height:70px; width: 70px" srcset="" class="mb-1 img-thumbnail">
+                            <div class="form-group">
+                                <input type="file" name="image" placeholder="Choose image" id="image">
+                                @error('image')
+                                <div class="alert alert-danger mt-1 mb-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6" id="regis_con_name">
+                            <div class="form-group float-left">
+                                <label for="level">Category:</label>
+                                <select id="level" name="level">
+                                    <option value="visitor" selected >Visitor</option>
+                                    <option value="tenant">Tenant</option>
+                                    <option value="employee">Employee</option>
+                                    <option value="admin">Administrator</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container" id="regis_con">
                     <h5 id="regis_head">Complete Name</h5>
                     <div class="row">
                         <div class="col">
@@ -107,7 +123,7 @@
                             <input type="text" placeholder="RFID" name="rf_id" id="regis_field"><br>
                         </div>
                     </div>
-                </div>   
+                </div>
                 <br><br>
                 <div class="container" id="regis_btns">
                 <div class="row justify-content-center"id="regis_btn">
@@ -118,4 +134,26 @@
         </div>
     </div>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#image").change(function(){
+            var input = this;
+            var url = $(this).val();
+            var ext = url.substring(url.lastIndexOf('.') + 1).toLowerCase();
+            if (input.files && input.files[0]&& (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg"))
+            {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                $('#profile_pic').attr('src', e.target.result);
+                }
+            reader.readAsDataURL(input.files[0]);
+            }
+            else
+            {
+                $('#profile_pic').attr('src', '/image/default.png');
+            }
+        });
+    });
+</script>
 @endsection

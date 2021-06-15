@@ -55,14 +55,25 @@ class PersonController extends Controller
      */
     public function store(Request $request)
     {
-        //this will return validation. 
+        //this will return validation.
         $request->validate([
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'floor_no' => 'required',
             'house_no' => 'required',
+            'street' => 'required',
+            'barangay' => 'required',
             'contact_no' => 'required',
+            'city' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:persons'],
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
         ]);
+        $name = $request->file('image')->getClientOriginalName();
+
+        $path = $request->file('image')->store('public/image/pic');
         // this is variable assigning through create
         $username = Auth::user()->name;
-        $person = new Person;   
+        $person = new Person;
         $person->uniq_id = uniqid('sd_');
         $person->last_name = $request->last_name;
         $person->first_name = $request->first_name;
@@ -77,9 +88,11 @@ class PersonController extends Controller
         $person->rf_id = $request->rf_id;
         $person->auth = $username;
         $person->level = $request->level;
-        
+        $person->profile_pic = $name;
+        $person->path = $path;
+
         $uniqueid=$person->uniq_id;
-    
+
         $person->save();
         return redirect()->route('persons.create')
                         ->with('success','Entry created successfully.');
@@ -107,7 +120,7 @@ class PersonController extends Controller
      */
     public function edit(Person $person)
     {
-        //redirect to edit page. 
+        //redirect to edit page.
         return view('persons.edit',compact('person'));
     }
 
@@ -152,7 +165,7 @@ class PersonController extends Controller
     //when the search button was pressed this will enter.
     public function trace(Request $request)
     {
-        //the get() funtion is for taking all database within the condition stated; the first() function only returns ONE recent value 
+        //the get() funtion is for taking all database within the condition stated; the first() function only returns ONE recent value
         $res = Person::where('uniq_id', $request['code'])->orwhere('rf_id', $request['code'])->get();
         $ress = Person::where('uniq_id', $request['code'])->orwhere('rf_id', $request['code'])->first();
         //if the search found nothing, return this
@@ -164,15 +177,15 @@ class PersonController extends Controller
             $stats = Log::orderBy('date','desc')->orderBy('time','desc')->where('uniq_id', $ress->rf_id)->first();
             $statss="";
 
-            //conditional empty statement for the 'STATUS' in logs. 
+            //conditional empty statement for the 'STATUS' in logs.
             if(empty($stats)){
                 $statss = "";
             }
-            //this is the else statement. 
+            //this is the else statement.
             else{
                 $statss = $stats->status;
             }
-            //conditional statement for the 'STATUS' in logs. 
+            //conditional statement for the 'STATUS' in logs.
             switch ($statss) {
                 case "":
                     $statss = "IN";
@@ -186,7 +199,7 @@ class PersonController extends Controller
                 default:
                     $statss = "IN";
             }
-            //to create new entry in logs 
+            //to create new entry in logs
             Log::create([
                 'uniq_id' => $ress->rf_id,
                 'time' => Carbon::now()->toTimeString(),
@@ -195,28 +208,28 @@ class PersonController extends Controller
                 'auth' => Auth::user()->name
             ]);
 
-            //return the recent entered logs to the trace page 
+            //return the recent entered logs to the trace page
             $list = DB::table('person')->where('rf_id', $request['code'])->orwhere('person.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
                     ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
             return view('tracing.scan', compact('list',$list));
         }
     }
-    //this is tracing page 
+    //this is tracing page
     public function search(Request $request){
-        //for the page not bothering about the variables missing. 
+        //for the page not bothering about the variables missing.
         $list = DB::table('person')->where('rf_id', $request['code'])->orwhere('person.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
                     ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
         return view('tracing.scan', compact('list',$list));
     }
 
-    //PDF viewer and printing. 
+    //PDF viewer and printing.
     public function pdflogs(){
         $name = Auth::user()->name;
-        //here is to keep the User logs private to the User only 
+        //here is to keep the User logs private to the User only
         $list = DB::table('logs')->where('logs.auth',$name)
                     ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
         view()->share('lists',$list);
-        //sending variables to the pdf 
+        //sending variables to the pdf
         $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');
         return $pdf->stream('logs.pdf');
     }
@@ -236,14 +249,14 @@ class PersonController extends Controller
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        // $imageName = time().'.'.$request->image->extension();  
-        $imageName = session()->get('uniqueid').'.'.$request->image->extension();  
+        // $imageName = time().'.'.$request->image->extension();
+        $imageName = session()->get('uniqueid').'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
 
         /* Store $imageName name in DATABASE from HERE */
         return back()
             ->with('success','You have successfully upload image.')
-            ->with('image',$imageName); 
+            ->with('image',$imageName);
     }
-    
+
 }

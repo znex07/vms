@@ -29,6 +29,8 @@ class CreatePersonTable extends Migration
             $table->string('rf_id')->nullable()->unique();
             $table->string('auth')->nullable();
             $table->string('level')->nullable();
+            $table->string('profile_pic')->nullable();
+            $table->string('path')->nullable();
             $table->timestamps();
         });
     }

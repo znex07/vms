@@ -17,7 +17,9 @@
         <div class="row justify-content-center">
             {!! QrCode::size(250)
                 ->generate($person->uniq_id); !!}
+        <img src="/{{$person->path}}" alt="" id="profile_pic" style="height:250px; width: 250px" srcset="" class="mb-1 img-thumbnail">
         </div>
+
         <br>
         <div id="s_container">
             <h1>{{ $person->last_name }}, {{ $person->first_name }} {{ $person->middle_name }}</h1><br>

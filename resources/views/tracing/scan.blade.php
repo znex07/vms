@@ -3,7 +3,7 @@
 
 <div class="container" id="s_container">
     <div id="s_box">
-        <table class="s_table"> 
+        <table class="s_table">
             <tr>
                 <form action="trace" method="POST">
                     @csrf
@@ -41,13 +41,15 @@
     {{-- conditional statements just to remove the constant error of missing variable; when the variable returns null it will view as empty. --}}
     @if (empty($list))
     @else
+    <img src="/{{$list->path}}" alt="" id="profile_pic" style="height:250px; width: 250px" srcset="" class="mb-1 img-thumbnail">
+
     <h1><strong>{{$list->status}}</strong></h1> <br>
     <h3>{{$list->last_name}}, {{$list->first_name}} {{$list->middle_name}}</h3> <br>
-    
+
     {{-- this is Carbon; a php library separates date and time. For the time and date format, check the Carbon documentation --}}
     {{Carbon\Carbon::parse($list->time)->format('h:i:s A')}} <br>
     {{Carbon\Carbon::parse($list->date)->format('d M Y')}}
     @endif
-    
+
 </div>
 @endsection

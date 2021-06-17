@@ -227,7 +227,7 @@ class PersonController extends Controller
     public function pdflogs(){
         $name = Auth::user()->name;
         //here is to keep the User logs private to the User only
-        $list = DB::table('logs')->where('logs.auth',$name)
+        $list = DB::table('logs')->where('logs.auth',$name)->orderBy('logs.created_at', 'desc')
                     ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
         view()->share('lists',$list);
         //sending variables to the pdf

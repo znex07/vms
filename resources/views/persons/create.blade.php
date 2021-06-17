@@ -2,16 +2,7 @@
 
 @section('content')
 <div class="container" >
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                {{-- insert header here if you want --}}
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
-            </div>
-        </div>
-    </div>
+
 
     {{-- if error appears then this will appear.  --}}
     @if ($errors->any())
@@ -38,7 +29,11 @@
         {{-- this is the style of the div, to change overall design, delete the class="card" --}}
         <div class="card">
             {{-- this one is the card header --}}
-            <div class="card-header"> <strong>REGISTRATION</strong></div>
+            <div class="card-header"> <strong>REGISTRATION</strong>
+            <div class="pull-right">
+                <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
+            </div>
+            </div>
             {{-- this will go to the Controller, check the web.php --}}
             <form action="{{ route('persons.store') }}" method="POST" enctype="multipart/form-data">
                 {{-- always add csrf in every form or even filling up data --}}

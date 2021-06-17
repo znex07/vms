@@ -41,6 +41,9 @@
     {{-- conditional statements just to remove the constant error of missing variable; when the variable returns null it will view as empty. --}}
     @if (empty($list))
     @else
+    <div class="row">
+     b4-gr
+    </div>
     <img src="/{{$list->path}}" alt="" id="profile_pic" style="height:250px; width: 250px" srcset="" class="mb-1 img-thumbnail">
 
     <h1><strong>{{$list->status}}</strong></h1> <br>

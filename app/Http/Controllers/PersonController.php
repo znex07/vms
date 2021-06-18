@@ -241,7 +241,7 @@ class PersonController extends Controller
         $list = DB::table('logs')->where('person.last_name',$name_search)->orWhere('person.first_name',$name_search)->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
                 ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
             //    dd(sizeof($list));
-            if (sizeof($list) > 1) {
+            if (sizeof($list) >= 1) {
             view()->share('lists',$list);
             //sending variables to the pdf
             $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');

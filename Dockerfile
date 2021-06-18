@@ -4,8 +4,8 @@ COPY . /app
 RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
 RUN apk add php7-gd
-# RUN composer require ext-gd:*
-RUN composer global require hirak/prestissimo && composer install
+RUN composer install
+RUN composer global require hirak/prestissimo
 
 FROM php:7.3-apache-stretch
 RUN docker-php-ext-install pdo pdo_mysql

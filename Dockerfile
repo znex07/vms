@@ -4,7 +4,7 @@ COPY . /app
 RUN composer global require hirak/prestissimo && composer install
 
 FROM php:7.3-apache-stretch
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install gd pdo pdo_mysql
 
 EXPOSE 8080
 COPY --from=build /app /var/www/

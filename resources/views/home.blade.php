@@ -36,7 +36,7 @@
                         </div>
                         <div class="container" id="regis_btns">
                         <div class="row justify-content-center"id="regis_btn">
-                            <a target="_blank" class="btn btn-info" id="btn_regis" href="pdflogs">Print Reports</a>
+                            <a target="_blank" class="btn btn-info" id="btn_regis" href="searchbyname">Print Reports</a>
                         </div>
                         </div>
                     </div>

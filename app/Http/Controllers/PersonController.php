@@ -222,19 +222,36 @@ class PersonController extends Controller
                     ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
         return view('tracing.scan', compact('list',$list));
     }
-
-    //PDF viewer and printing.
-    public function pdflogs(){
-        $name = Auth::user()->name;
-        //here is to keep the User logs private to the User only
-        $list = DB::table('logs')->where('logs.auth',$name)->orderBy('logs.created_at', 'desc')
-                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
-        view()->share('lists',$list);
-        //sending variables to the pdf
-        $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');
-        return $pdf->stream('logs.pdf');
+    public function searchby(Request $request){
+        // dd($request->name_person);
+        //for the page not bothering about the variables missing.
+        $list = DB::table('person')->where('rf_id', $request['code'])->orwhere('person.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
+                    ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
+        return view('pdf.search', compact('list',$list));
     }
-
+    //PDF viewer and printing.
+    
+    public function pdflogs(Request $request){
+        $name = Auth::user()->name;
+        $name_search = $request->name_person;
+        $from = $request->date_search1;
+        $to = $request->date_search2;
+        //here is to keep the User logs private to the User only
+        $list = DB::table('logs')->where('person.last_name',$name_search)->orWhere('person.first_name',$name_search)->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
+                ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+        if (sizeof($list) == 1) {
+            view()->share('lists',$list);
+            //sending variables to the pdf
+            $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');
+            return $pdf->stream('logs.pdf');
+        } else {
+            return back()->withErrors(['No Record Found']);
+        }
+        
+        
+    
+    }
+    
     //these uploading image functions.
     //tinker this if you need to add upload image
     public function imageUpload(Request $request)

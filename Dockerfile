@@ -1,9 +1,9 @@
 FROM php:7.3-apache-stretch
-RUN apk add imagemagick php7-imagick wget
-RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
 RUN cd /app && \
 WORKDIR /app
 COPY . /app
+RUN apk add imagemagick php7-imagick wget
+RUN sh -c "wget http://getcomposer.org/composer.phar && chmod a+x composer.phar && mv composer.phar /usr/local/bin/composer"
 RUN apk add php7-curl
 RUN apk add libpng-dev
 RUN apk add php7-gd

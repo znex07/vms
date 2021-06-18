@@ -17,14 +17,14 @@
                         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
                             <h3>FROM</h3>
                             <input placeholder="Select date" type="date" name="date_search1" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-                            
+
                         </div>
                         <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
                             <h3>TO</h3>
                             <input placeholder="Select date" type="date" name="date_search2" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-                            
+
                         </div>
-                        
+
                     </td>
                 </form>
             </tr>
@@ -66,4 +66,3 @@
 
 </div>
 @endsection
-\

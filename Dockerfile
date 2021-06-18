@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . /app
 RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
-RUN apk add php7.0-gd
+RUN apk add php7-gd
 RUN composer require "ext-gd:*" --ignore-platform-reqs
 
 FROM php:7.3-apache-stretch

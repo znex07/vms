@@ -19,7 +19,21 @@
     <p><h3>{{Auth::user()->name}} Log Reports</h3> <br> 7461 Bagtikan Street, Makati City, Metro Manila, Philippines</p>
     <pre>This log report shouldn't be disclosed to the public as it contains personal information. Only to the eyes of the administrator.</pre>
     <br>
-
+    
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                <form action="search" method="POST">
+                    @csrf
+                <form class="form-inline md-form mr-auto">
+                  <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-unique btn-rounded btn-sm my-0 waves-effect waves-light" id="s_search">Search</button>
+                  
+                </form>
+          
+              </div>
+                    </div>
+    
     {{-- these are the reports showed on the pdf. --}}
     <table class="table table-bordered" style="width: 100%; text-align:center; border:1px solid black">
         <tr>

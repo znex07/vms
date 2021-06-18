@@ -5,18 +5,28 @@
     <div id="s_box">
         <table class="s_table">
             <tr>
-                <form action="trace" method="POST">
+                <form action="pdflogs" method="POST">
                     @csrf
                     <td>
-                        <input class="text" placeholder="Input your unique code" name="code" autocomplete="off" autofocus id="s_field">
+                        <input class="text" placeholder="Input your name" name="name_person" autocomplete="off" autofocus id="s_field">
                     </td>
                     <td>
                         <button type="submit" class="btn btn-danger" id="s_search">Search</button>
                     </td>
+                    <td>
+                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+                            <h3>FROM</h3>
+                            <input placeholder="Select date" type="date" name="date_search1" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                            
+                        </div>
+                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
+                            <h3>TO</h3>
+                            <input placeholder="Select date" type="date" name="date_search2" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                            
+                        </div>
+                        
+                    </td>
                 </form>
-                <td>
-                    <button class="btn btn-primary" onclick="window.location='{{ route("home") }}'" id="s_bh">Back to Home</button>
-                </td>
             </tr>
         </table>
     </div>
@@ -31,7 +41,7 @@
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+                <h3>{{ $error }}</h3>
             @endforeach
         </ul>
     </div>
@@ -56,3 +66,4 @@
 
 </div>
 @endsection
+\

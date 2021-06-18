@@ -26,9 +26,10 @@ Auth::routes();
 Route::resource('persons', App\Http\Controllers\PersonController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('search', [App\Http\Controllers\PersonController::class, 'search'])->name('search');
+Route::get('searchbyname', [App\Http\Controllers\PersonController::class, 'searchby'])->name('search');
 Route::get('dashboard', [App\Http\Controllers\PersonController::class, 'index'])->name('dashboard');
 Route::post('trace', [App\Http\Controllers\PersonController::class, 'trace'])->name('trace');
-Route::get('pdflogs',[App\Http\Controllers\PersonController::class, 'pdflogs'])->name('pdflogs');
+Route::post('pdflogs',[App\Http\Controllers\PersonController::class, 'pdflogs'])->name('pdflogs');
 Route::get('send-mail', function () {
    
     $details = [

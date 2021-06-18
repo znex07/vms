@@ -5,7 +5,8 @@ RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
 RUN apk add libpng-dev
 RUN apk add php7-gd
-
+RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/1b137f8bf6db3e79a38a5bc45324414a6b1f9df2/web/installer -O - -q | php -- --quiet
+RUN mv composer.phar /usr/local/bin/composer
 RUN composer require "ext-gd:*" --ignore-platform-reqs
 
 FROM php:7.3-apache-stretch

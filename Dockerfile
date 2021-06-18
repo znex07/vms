@@ -3,12 +3,12 @@ WORKDIR /app
 COPY . /app
 RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
-RUN apk add php7-gd
+RUN apk add php7.0-gd
 RUN composer require "ext-gd:*" --ignore-platform-reqs
-RUN composer global require hirak/prestissimo && composer install
 
 FROM php:7.3-apache-stretch
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install gd pdo pdo_mysql
+RUN composer global require hirak/prestissimo && composer install
 
 EXPOSE 8080
 COPY --from=build /app /var/www/

@@ -1,5 +1,5 @@
 FROM php:7.3-apache-stretch
-# WORKDIR /app
+WORKDIR /app
 # RUN cd /app && \
 RUN mkdir -p /app
 COPY . /app

@@ -3,7 +3,7 @@ WORKDIR /app
 COPY . /app
 RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
-RUN apk add php7-gd
+RUN apk add php-gd
 RUN composer global require hirak/prestissimo && composer install
 
 FROM php:7.3-apache-stretch

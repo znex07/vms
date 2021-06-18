@@ -1,12 +1,13 @@
 FROM composer:1.9.0 as build
 WORKDIR /app
 COPY . /app
+RUN apk add imagemagick php7-imagick
 RUN apk add php7-curl
 RUN apk add php7-gd
 RUN composer global require hirak/prestissimo && composer install
 
 FROM php:7.3-apache-stretch
-RUN docker-php-ext-install gd pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql
 
 EXPOSE 8080
 COPY --from=build /app /var/www/

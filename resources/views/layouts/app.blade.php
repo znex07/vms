@@ -31,7 +31,7 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
+            <div class="container   ">
                 <img src="/image/icon.jpg" style="height: 40px; width: 40px" class="img-thumbnail rounded-circle" alt="" srcset="">
                 <a class="navbar-brand " href="{{ url('/') }}">
                     {{-- {{ config('app.name', 'Building Management System') }} --}}

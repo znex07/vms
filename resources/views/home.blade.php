@@ -31,12 +31,12 @@
                     <div class="card-body" id="card_some">
                         <div class="container" id="regis_btns">
                         <div class="row justify-content-center" id="regis_btn">
-                            <button type="button" id="btn_regis" class="btn btn-primary" onclick="window.location='{{ route('search') }}'" target="_blank">Scan For Tracing</button>
+                            <a type="button" id="btn_regis" class="btn btn-primary" href="search" target="_blank">Scan For Tracing</a>
                         </div>
                         </div>
                         <div class="container" id="regis_btns">
                         <div class="row justify-content-center"id="regis_btn">
-                            <a target="_blank" class="btn btn-info" id="btn_regis" href="searchbyname">Print Reports</a>
+                            <a target="_blank" class="btn btn-info" id="btn_regis" href="reports">Print Reports</a>
                         </div>
                         </div>
                     </div>

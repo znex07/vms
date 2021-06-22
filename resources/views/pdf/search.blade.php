@@ -2,33 +2,52 @@
 @section('content')
 
 <div class="container" id="s_container">
-    <div id="s_box">
-        <table class="s_table">
-            <tr>
-                <form action="pdflogs" method="POST">
+        <div class="container mb-3">
+            <h1>View Records</h1>
+                <form action="searchbyname" method="POST">
                     @csrf
-                    <td>
-                        <input class="text" placeholder="Input your name" name="name_person" autocomplete="off" autofocus id="s_field">
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-danger" id="s_search">Search</button>
-                    </td>
-                    <td>
-                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
-                            <h3>FROM</h3>
-                            <input placeholder="Select date" type="date" name="date_search1" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-
+                    
+                    <div class="row">
+                        <div class="col-md-12 mb-2">
+                                
+                        
+                            {{-- FROM --}}
+                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
+                                <div class="col-md-6">
+                                <h6>FROM</h6>
+                                    <input placeholder="Select date" type="date" name="date_search1" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                                </div>
+                            </div>
+                            {{-- TO --}}
+                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
+                                <div class="col-md-6">
+                                    <h6>TO</h6>
+                                    <input placeholder="Select date" type="date" name="date_search2" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    
+                                </div>
+                            </div>
+                        
                         </div>
-                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker">
-                            <h3>TO</h3>
-                            <input placeholder="Select date" type="date" name="date_search2" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                
+                                <input class="text form-control " placeholder="search by name" name="name_person" autocomplete="off" autofocus >
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-danger " id="s_search">View Logs</button>
+                                
+                            </div>
+                      </div>
+                    </div>
+                                        
+                        
+                        
 
-                        </div>
 
-                    </td>
+
                 </form>
-            </tr>
-        </table>
     </div>
     {{-- appear error message if any --}}
     @if ($message = Session::get('error'))

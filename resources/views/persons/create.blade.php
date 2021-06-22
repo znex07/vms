@@ -27,12 +27,13 @@
     {{-- registration body --}}
     <div class="row justify-content-center">
         {{-- this is the style of the div, to change overall design, delete the class="card" --}}
-        <div class="card">
+        <div class="card" style="height: 100% !important">
             {{-- this one is the card header --}}
             <div class="card-header"> <strong>REGISTRATION</strong>
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('home') }}"> Back</a>
-            </div>
+                <div class="pull-right">
+                    <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+    
             </div>
             {{-- this will go to the Controller, check the web.php --}}
             <form action="{{ route('persons.store') }}" method="POST" enctype="multipart/form-data">

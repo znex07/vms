@@ -3,6 +3,15 @@
 
 <div class="container" >
     <div id="s_box">
+        <div class="card-header bg-light"> 
+
+        <div class="pull-right">
+            <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+        <h1>Scan RFID</h1>
+
+        </div>
+
                 <form action="trace" method="POST">
                     @csrf
                         

@@ -1,8 +1,11 @@
 @extends('layouts.app')
 @section('content')
 
-<div class="container" id="s_container">
-        <div class="container mb-3">
+<div class="container py-6" id="s_container">
+        <div class="container mb-3 bg-light " style="height: 400px; padding-top:40px">
+            <div class="pull-right">
+                <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
+            </div>
             <h1>View Records</h1>
                 <form action="searchbyname" method="POST">
                     @csrf
@@ -15,14 +18,14 @@
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
                                 <div class="col-md-6">
                                 <h6>FROM</h6>
-                                    <input placeholder="Select date" type="date" name="date_search1" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    <input placeholder="Select date" type="date" name="date_search1" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
                                 </div>
                             </div>
                             {{-- TO --}}
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
                                 <div class="col-md-6">
                                     <h6>TO</h6>
-                                    <input placeholder="Select date" type="date" name="date_search2" class="form-control" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                                    <input placeholder="Select date" type="date" name="date_search2" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
                                     
                                 </div>
                             </div>
@@ -33,7 +36,7 @@
                         <div class="col-md-12">
                             <div class="col-md-6">
                                 
-                                <input class="text form-control " placeholder="search by name" name="name_person" autocomplete="off" autofocus >
+                                <input class="text form-control border border-success" placeholder="search by name" name="name_person" autocomplete="off" autofocus >
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-success" id="s_search">View Logs</button>

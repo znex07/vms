@@ -36,7 +36,7 @@
                                 <input class="text form-control " placeholder="search by name" name="name_person" autocomplete="off" autofocus >
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-danger " id="s_search">View Logs</button>
+                                <button type="submit" class="btn btn-success" id="s_search">View Logs</button>
                                 
                             </div>
                       </div>

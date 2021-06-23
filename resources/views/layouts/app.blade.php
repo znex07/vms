@@ -86,7 +86,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-image: url('/image/abc.jpg'); background-repeat: no-repeat; background-size: cover">
+        <main class="py-4" style="background-image: url('/image/bg.jpg'); background-repeat: no-repeat; background-size: cover">
             @yield('content')
         </main>
     </div>

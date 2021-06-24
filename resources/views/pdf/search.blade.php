@@ -9,11 +9,11 @@
             <h1>View Records</h1>
                 <form action="searchbyname" method="POST">
                     @csrf
-                    
+
                     <div class="row">
                         <div class="col-md-12 mb-2">
-                                
-                        
+
+
                             {{-- FROM --}}
                             <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
                                 <div class="col-md-6">
@@ -26,27 +26,27 @@
                                 <div class="col-md-6">
                                     <h6>TO</h6>
                                     <input placeholder="Select date" type="date" name="date_search2" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-                                    
+
                                 </div>
                             </div>
-                        
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="col-md-6">
-                                
+
                                 <input class="text form-control border border-success" placeholder="search by name" name="name_person" autocomplete="off" autofocus >
                             </div>
                             <div class="col-md-6">
                                 <button type="submit" class="btn btn-success" id="s_search">View Logs</button>
-                                
+
                             </div>
                       </div>
                     </div>
-                                        
-                        
-                        
+
+
+
 
 
 
@@ -60,10 +60,10 @@
     @endif
     @if ($errors->any())
     <div class="alert alert-danger">
-        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        {{-- <strong>Whoops!</strong> There were some problems with your input.<br><br> --}}
         <ul>
             @foreach ($errors->all() as $error)
-                <h3>{{ $error }}</h3>
+                <h3><i class="fa fa-info-circle"></i> {{ $error }}</h3>
             @endforeach
         </ul>
     </div>

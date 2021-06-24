@@ -245,7 +245,14 @@ class PersonController extends Controller
         }else{
             //filter by name and date
             $list = DB::table('logs')->where('person.first_name','LIKE',"%{$name_search}%")->orWhere('person.last_name','LIKE',"%{$name_search}%")->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
-                ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+            if(sizeof($list) <=0)
+            {
+                return redirect()->back()->withErrors('No record found. please input a valid name.');
+            }else{
+
+
+            }
 
         }
 

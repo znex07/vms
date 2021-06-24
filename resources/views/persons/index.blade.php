@@ -10,19 +10,20 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <div class="row justify-content-center">
+    <div class="row">
       <div class="col">
 
         <div class="card">
             <div class="card-header">
+                <a class="btn btn-sm btn-dark" id="theme"> Night Theme</a>
 
                 <div class="float-right">
                     <a class="btn btn-sm btn-success" href="{{ route('persons.create') }}"> Register new Entry</a>
                     <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
                 </div>
             </div>
-          <div class="card-body">
-            <table class="table table-dark table-bordered table-warning" id="persons_table">
+          <div class="card-body table-responsive">
+            <table class="table table-bordered table-dark dt-responsive display nowrap" cellspacing="0" id="persons_table">
                 <thead>
                 <tr>
                     <th>No</th>
@@ -31,7 +32,7 @@
                     <th>Complete Name</th>
                     <th>Contact Number</th>
                     <th>Position</th>
-                    <th width="280px">Action</th>
+                    <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -47,11 +48,13 @@
                     <td>{{ $person->level }}</td>
                     <td>
                         <form action="{{ route('persons.destroy',$person->id) }}" method="POST">
-                            <a class="btn btn-info" href="{{ route('persons.show',$person->id) }}">Show</a>
-                            <a class="btn btn-primary" href="{{ route('persons.edit',$person->id) }}">Edit</a>
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a class="btn btn-sm btn-info" href="{{ route('persons.show',$person->id) }}">Show</a>
+                                <a class="btn btn-sm btn-primary" href="{{ route('persons.edit',$person->id) }}">Edit</a>
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </div>
                         </form>
                     </td>
                 </tr>
@@ -69,7 +72,17 @@
 
 <script>
     $(document).ready(function() {
-
+        $('#theme').click(function(){
+            if($(this).text() == 'Night Theme'){
+                $('#persons_table').addClass('table-dark');
+                $('#persons_table').removeClass('table-light');
+                $(this).text('Day Theme');
+            }else{
+                $('#persons_table').addClass('table-light');
+                $('#persons_table').removeClass('table-dark');
+                $(this).text('Night Theme');
+            }
+        });
         $('#persons_table').DataTable({
             responsive: true,
             order: [],

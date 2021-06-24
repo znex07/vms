@@ -21,7 +21,8 @@
         </div>
     @endif
 
-    <table class="table table-bordered table-warning">
+    <table class="table table-dark table-bordered table-warning" id="persons_table">
+        <thead>
         <tr>
             <th>No</th>
             <th>picture</th>
@@ -31,9 +32,11 @@
             <th>Position</th>
             <th width="280px">Action</th>
         </tr>
+    </thead>
+    <tbody>
         @foreach ($persons as $person)
         <tr>
-            <td>{{ ++$i }}</td>
+            <td>{{$i++}}</td>
             <td>
                 <img src="{{$person->path}}" alt="" id="profile_pic" style="height:50px; width: 50px" srcset="" class="mb-1 img-thumbnail">
             </td>
@@ -52,8 +55,24 @@
             </td>
         </tr>
         @endforeach
-    </table>
+    </tbody>
 
-    {!! $persons->links() !!}
+
+</table>
+
 </div>
+
+<script>
+    $(document).ready(function() {
+
+        $('#persons_table').DataTable({
+            responsive: true,
+            order: [],
+            columnDefs: [
+                { responsivePriority: 1, targets: 0 },
+                { responsivePriority: 2, targets: 5 }
+            ],
+        });
+    });
+</script>
 @endsection

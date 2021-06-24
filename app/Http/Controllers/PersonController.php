@@ -31,10 +31,10 @@ class PersonController extends Controller
     {
         //this is the view page. Data tables
         $username = Auth::user()->name;
-        $persons = Person::where('auth',$username)->latest()->paginate(10);
+        $persons = Person::where('auth',$username)->get();
+        $i =1;
         //this returns the data inside the data tables in boostrap
-        return view('persons.index',compact('persons'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        return view('persons.index',compact('persons','i'));
     }
 
     /**

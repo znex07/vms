@@ -223,7 +223,7 @@ class PersonController extends Controller
         return view('tracing.scan', compact('list',$list));
     }
     public function reports(Request $request){
-       
+
         return view('pdf.search');
     }
     public function searchby(Request $request){
@@ -231,27 +231,29 @@ class PersonController extends Controller
         $name_search = $request->name_person;
         $from = $request->date_search1;
         $to = $request->date_search2;
-        // dd($to);
+        $now = Carbon::now()->format('Y-m-d');
         //here is to keep the User logs private to the User only
-        if($name_search == ""){
+        if($name_search == "" && $from == $now && $to == $now){
+            // show all records
+            $list = DB::table('logs')->orderBy('logs.created_at', 'desc')
+            ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+        }elseif($name_search == ""){
+            // filter by date
             $list = DB::table('logs')->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
-                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
-        }else{
+                ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
 
-            $list = DB::table('logs')->where('person.last_name',$name_search)->orWhere('person.first_name',$name_search)->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
-                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
-                //    dd(sizeof($list));
+        }else{
+            //filter by name and date
+            $list = DB::table('logs')->where('person.first_name','LIKE',"%{$name_search}%")->orWhere('person.last_name','LIKE',"%{$name_search}%")->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
+                ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+
         }
-            if (sizeof($list) >= 1) {
-            view()->share('lists',$list);
-            //sending variables to the pdf
-            $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');
-            return $pdf->stream('logs.pdf');
-        } else {
-            return back()->withErrors(['No Record Found']);
-        }
+
+        view()->share('lists',$list);
+        //PDF viewer and printing.
+        $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');
+        return $pdf->stream('logs.pdf');
     }
-    //PDF viewer and printing.
 
     public function pdflogs(Request $request){
         $name = Auth::user()->name;

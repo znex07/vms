@@ -2,55 +2,41 @@
 @section('content')
 
 <div class="container py-6" id="s_container">
-        <div class="container mb-3 bg-light " style="height: 400px; padding-top:40px">
-            <div class="pull-right">
-                <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
-            </div>
-            <h1>View Records</h1>
-                <form action="searchbyname" method="POST">
-                    @csrf
+    <div class="container " style="height: 100%; padding-top:40px">
+        <div class="card mb-3">
 
-                    <div class="row">
-                        <div class="col-md-12 mb-2">
+        <div class="card-header ">
+            <h3 class="float-left">View Records</h3>
+            <a class="btn btn-sm btn-primary float-right" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
 
-
-                            {{-- FROM --}}
-                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
-                                <div class="col-md-6">
-                                <h6>FROM</h6>
-                                    <input placeholder="Select date" type="date" name="date_search1" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-                                </div>
-                            </div>
-                            {{-- TO --}}
-                            <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
-                                <div class="col-md-6">
-                                    <h6>TO</h6>
-                                    <input placeholder="Select date" type="date" name="date_search2" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
-
-                                </div>
-                            </div>
-
+        <div class="card-body">
+            <form action="searchbyname" method="POST">
+                @csrf
+                <div class="row justify-content-center ">
+                    <div class="col-md-4 p-2 border border-info rounded">
+                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
+                            <h6>FROM</h6>
+                                <input placeholder="Select date" type="date" name="date_search1" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
                         </div>
+                        {{-- TO --}}
+                        <div id="date-picker-example" class="md-form md-outline input-with-post-icon datepicker " >
+                                <h6>TO</h6>
+                                <input placeholder="Select date" type="date" name="date_search2" class="form-control border border-success" value="{{ Carbon\Carbon::now()->format('Y-m-d') }}">
+                        </div>
+
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="col-md-6">
+                    <div class="col-md-4">
+                        <h6>Search</h6>
 
-                                <input class="text form-control border border-success" placeholder="search by name" name="name_person" autocomplete="off" autofocus >
-                            </div>
-                            <div class="col-md-6">
-                                <button type="submit" class="btn btn-success" id="s_search">View Logs</button>
+                        <input class="text form-control border border-success" placeholder="search by name" name="name_person" autocomplete="off" autofocus >
+                        <button type="submit" class="btn btn-success mt-3" id="s_search">View Logs</button>
 
-                            </div>
-                      </div>
                     </div>
+                </div>
+            </form>
 
-
-
-
-
-
-                </form>
+        </div>
     </div>
     {{-- appear error message if any --}}
     @if ($message = Session::get('error'))
@@ -69,22 +55,5 @@
     </div>
     @endif
 
-    <br><br>
-    {{-- conditional statements just to remove the constant error of missing variable; when the variable returns null it will view as empty. --}}
-    @if (empty($list))
-    @else
-    <div class="row">
-     b4-gr
     </div>
-    <img src="/{{$list->path}}" alt="" id="profile_pic" style="height:250px; width: 250px" srcset="" class="mb-1 img-thumbnail">
-
-    <h1><strong>{{$list->status}}</strong></h1> <br>
-    <h3>{{$list->last_name}}, {{$list->first_name}} {{$list->middle_name}}</h3> <br>
-
-    {{-- this is Carbon; a php library separates date and time. For the time and date format, check the Carbon documentation --}}
-    {{Carbon\Carbon::parse($list->time)->format('h:i:s A')}} <br>
-    {{Carbon\Carbon::parse($list->date)->format('d M Y')}}
-    @endif
-
-</div>
 @endsection

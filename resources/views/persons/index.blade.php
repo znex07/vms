@@ -2,17 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-            </div>
-            <div class="pull-right">
-                <a class="btn btn-success" href="{{ route('persons.create') }}"> Register new Entry</a>
-                <a class="btn btn-primary" href="{{ route('home') }}"> Back to Home</a>
-            </div>
-        </div>
-    </div>
-   <br>
+
 
    {{-- notify success in the interactions --}}
     @if ($message = Session::get('success'))
@@ -20,45 +10,60 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+    <div class="row justify-content-center">
+      <div class="col">
 
-    <table class="table table-dark table-bordered table-warning" id="persons_table">
-        <thead>
-        <tr>
-            <th>No</th>
-            <th>picture</th>
-            <th>Card No</th>
-            <th>Complete Name</th>
-            <th>Contact Number</th>
-            <th>Position</th>
-            <th width="280px">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($persons as $person)
-        <tr>
-            <td>{{$i++}}</td>
-            <td>
-                <img src="{{$person->path}}" alt="" id="profile_pic" style="height:50px; width: 50px" srcset="" class="mb-1 img-thumbnail">
-            </td>
-            <td>{{ $person->rf_id }}</td>
-            <td>{{ $person->last_name }}, {{ $person->first_name }} {{ $person->middle_name }}</td>
-            <td>{{ $person->contact_no }}</td>
-            <td>{{ $person->level }}</td>
-            <td>
-                <form action="{{ route('persons.destroy',$person->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('persons.show',$person->id) }}">Show</a>
-                    <a class="btn btn-primary" href="{{ route('persons.edit',$person->id) }}">Edit</a>
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
+        <div class="card">
+            <div class="card-header">
 
+                <div class="float-right">
+                    <a class="btn btn-sm btn-success" href="{{ route('persons.create') }}"> Register new Entry</a>
+                    <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
+                </div>
+            </div>
+          <div class="card-body">
+            <table class="table table-dark table-bordered table-warning" id="persons_table">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>picture</th>
+                    <th>Card No</th>
+                    <th>Complete Name</th>
+                    <th>Contact Number</th>
+                    <th>Position</th>
+                    <th width="280px">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach ($persons as $person)
+                <tr>
+                    <td>{{$i++}}</td>
+                    <td>
+                        <img src="{{$person->path}}" alt="" id="profile_pic" style="height:50px; width: 50px" srcset="" class="mb-1 img-thumbnail">
+                    </td>
+                    <td>{{ $person->rf_id }}</td>
+                    <td>{{ $person->last_name }}, {{ $person->first_name }} {{ $person->middle_name }}</td>
+                    <td>{{ $person->contact_no }}</td>
+                    <td>{{ $person->level }}</td>
+                    <td>
+                        <form action="{{ route('persons.destroy',$person->id) }}" method="POST">
+                            <a class="btn btn-info" href="{{ route('persons.show',$person->id) }}">Show</a>
+                            <a class="btn btn-primary" href="{{ route('persons.edit',$person->id) }}">Edit</a>
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach
+                </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+</div>
+    </div>
 
-</table>
 
 </div>
 

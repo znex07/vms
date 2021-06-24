@@ -30,10 +30,10 @@
         <div class="card" style="height: 100% !important">
             {{-- this one is the card header --}}
             <div class="card-header"> <strong>REGISTRATION</strong>
-                <div class="pull-right">
+                <div class="float-right">
                     <a class="btn btn-sm btn-primary" href="{{ route('home') }}"><i class="fas fa-arrow-left"></i> Back</a>
                 </div>
-    
+
             </div>
             {{-- this will go to the Controller, check the web.php --}}
             <form action="{{ route('persons.store') }}" method="POST" enctype="multipart/form-data">

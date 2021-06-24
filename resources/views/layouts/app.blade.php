@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css"/>
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.bootstrap4.min.css"/>
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.dataTables.min.css"/>
+
 
 
 </head>
@@ -40,7 +42,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container   ">
                 <img src="/image/icon.jpg" style="height: 40px; width: 40px" class="img-thumbnail rounded-circle" alt="" srcset="">
-                <a class="navbar-brand " href="{{ url('/') }}">
+                <a class="navbar-brand " href="{{ url('/home') }}">
                     {{-- {{ config('app.name', 'Building Management System') }} --}}
                     {{-- Visitor Management System --}}
                     <h3 class="px-2 mt-1">Heart Dorm</h3>
@@ -93,7 +95,7 @@
             </div>
         </nav>
 
-        <main class="py-4" style="background-image: url('/image/bg.jpg'); background-repeat: no-repeat; background-size: cover">
+        <main class="p-4" style="height:100%; background-image: url('/image/bg.jpg'); background-repeat: no-repeat; background-size: cover">
             @yield('content')
         </main>
     </div>

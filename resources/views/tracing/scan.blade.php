@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<meta http-equiv="refresh" content="6; url=http://127.0.0.1:8000/search" />
 <div class="container" >
 <div class="card" >
         <div class="card-header bg-light">
@@ -57,6 +57,7 @@
                     @endforeach
                 </ul>
             </div>
+
             @endif
 
             {{-- conditional statements just to remove the constant error of missing variable; when the variable returns null it will view as empty. --}}

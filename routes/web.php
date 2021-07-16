@@ -24,6 +24,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::resource('persons', App\Http\Controllers\PersonController::class);
+Route::resource('visitor', App\Http\Controllers\VisitorController::class);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('search', [App\Http\Controllers\PersonController::class, 'search'])->name('search');
 Route::post('searchbyname', [App\Http\Controllers\PersonController::class, 'searchby'])->name('search');
@@ -32,13 +33,13 @@ Route::post('trace', [App\Http\Controllers\PersonController::class, 'trace'])->n
 Route::get('reports',[App\Http\Controllers\PersonController::class, 'reports'])->name('reports');
 Route::get('pdflogs',[App\Http\Controllers\PersonController::class, 'pdflogs'])->name('pdflogs');
 Route::get('send-mail', function () {
-   
+
     $details = [
         'title' => 'QR Trace',
         'body' => 'This is your QR code. Keep it private. Do not share it with anybody. Do not post it to any social media.'
     ];
-   
+
     \Mail::to('istraor999@gmail.com')->send(new \App\Mail\Email($details));
-   
+
     dd("Email is Sent.");
 });

@@ -50,7 +50,12 @@ class VisitorController extends Controller
             'city' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:person'],
         ]);
+
+        $name = $request->file('image')->getClientOriginalName();
+
+        $path = $request->file('image')->store('public/image/pic');
         // this is variable assigning through create
+        $username = Auth::user()->name;
         $person = new Visitor;
         $person->person_to_visit = $request->person_to_visit;
         $person->purpose = $request->purpose;
@@ -79,6 +84,7 @@ class VisitorController extends Controller
     public function show(Visitor $visitor)
     {
         //
+        return view('persons.show',compact('person'));
     }
 
     /**
@@ -90,6 +96,7 @@ class VisitorController extends Controller
     public function edit(Visitor $visitor)
     {
         //
+        return view('visitor.edit',compact('visitor'));
     }
 
     /**
@@ -102,6 +109,16 @@ class VisitorController extends Controller
     public function update(Request $request, Visitor $visitor)
     {
         //
+        $request->validate([
+            'last_name' => 'required',
+            'first_name' => 'required',
+            'middle_name' => 'required',
+            'house_no' => 'required',
+        ]);
+        $visitor->update($request->all());
+        return redirect()->route('persons.index')
+                        ->with('success','Entry updated successfully');
+
     }
 
     /**
@@ -112,6 +129,6 @@ class VisitorController extends Controller
      */
     public function destroy(Visitor $visitor)
     {
-        //
+        
     }
 }

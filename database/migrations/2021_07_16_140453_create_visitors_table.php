@@ -16,6 +16,7 @@ class CreateVisitorsTable extends Migration
 
         Schema::create('visitors', function (Blueprint $table) {
             $table->id();
+            $table->string('uniq_id')->nullable();
             $table->string('person_to_visit')->nullable();
             $table->string('destination')->nullable();
             $table->string('purpose')->nullable();
@@ -26,8 +27,11 @@ class CreateVisitorsTable extends Migration
             $table->string('house_no')->nullable();
             $table->string('street')->nullable();
             $table->string('barangay')->nullable();
+            $table->string('profile_pic')->nullable();
+            $table->string('path')->nullable();
             $table->string('city')->nullable();
             $table->string('contact_no')->nullable();
+            $table->string('level')->nullable();
             $table->string('email')->nullable();
             $table->timestamps();
         });

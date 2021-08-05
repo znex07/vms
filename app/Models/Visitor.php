@@ -12,6 +12,7 @@ class Visitor extends Model
         'person_to_visit',
         'purpose',
         'destination',
+        'last_name',
         'first_name',
         'middle_name',
         'house_no',

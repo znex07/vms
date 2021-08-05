@@ -36,10 +36,13 @@ class VisitorController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
+            // 'uniq_id' => 'required',
             'person_to_visit' => 'required',
             'purpose' => 'required',
             'destination' => 'required',
+            'last_name' => 'required',
             'first_name' => 'required',
             'middle_name' => 'required',
             'floor_no' => 'required',
@@ -50,11 +53,14 @@ class VisitorController extends Controller
             'city' => 'required',
             'email' => ['required', 'string', 'email', 'max:255', 'unique:person'],
         ]);
+        $uniq_id = uniqid('vs_');
         // this is variable assigning through create
         $person = new Visitor;
+        $person->uniq_id = $uniq_id;
         $person->person_to_visit = $request->person_to_visit;
         $person->purpose = $request->purpose;
         $person->destination = $request->destination;
+        $person->last_name = $request->last_name;
         $person->first_name = $request->first_name;
         $person->middle_name = $request->middle_name;
         $person->floor_no = $request->floor_no;
@@ -64,10 +70,11 @@ class VisitorController extends Controller
         $person->city = $request->city;
         $person->contact_no = $request->contact_no;
         $person->email = $request->email;
+        $person->level = 'visitor';
 
 
         $person->save();
-        return back()->with('success','Entry created successfully.')->with('unique_code',$request->first_name . $request->contact_no);
+        return back()->with('success','Entry created successfully.')->with('uniq_id', $uniq_id);
     }
 
     /**

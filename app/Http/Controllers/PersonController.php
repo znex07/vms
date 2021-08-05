@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Person;
 use App\Models\Log;
+use App\Models\Visitor;
 use Carbon\Carbon;
 use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
@@ -166,52 +167,98 @@ class PersonController extends Controller
     //when the search button was pressed this will enter.
     public function trace(Request $request)
     {
+        // dd(substr($request['code'], 0,3));
         //the get() funtion is for taking all database within the condition stated; the first() function only returns ONE recent value
-        $res = Person::where('uniq_id', $request['code'])->orwhere('rf_id', $request['code'])->get();
+        // $res = Person::where('uniq_id', $request['code'])->orwhere('rf_id', $request['code'])->get();
         $ress = Person::where('uniq_id', $request['code'])->orwhere('rf_id', $request['code'])->first();
+        $vis = Visitor::where('uniq_id', $request['code'])->get();
+        // dd($vis);
         //if the search found nothing, return this
-        if(empty($ress)){
+        if(empty($ress) && empty($vis)){
             return redirect()->action([PersonController::class, 'search'])->with('error','Your Data cannot be found. Notify your administrator.');
         }
         else{
             //narrowing the value to the newest data entry of the traced card.
-            $stats = Log::orderBy('date','desc')->orderBy('time','desc')->where('uniq_id', $ress->rf_id)->first();
-            $statss="";
+            $visitor_id = substr($request['code'],0, 3);
+            // dd($request['code']);
+            if($visitor_id == 'vs_'){
+                $stats = Log::orderBy('date','desc')->orderBy('time','desc')->where('uniq_id', $request['code'])->first();
+                if(empty($stats)){
+                    $statss = "";
+                }
+                //this is the else statement.
+                else{
+                    $statss = $stats->status;
+                }
+                //conditional statement for the 'STATUS' in logs.
+                switch ($statss) {
+                    case "":
+                        $statss = "IN";
+                        break;
+                    case "IN":
+                        $statss = "OUT";
+                        break;
+                    case "OUT":
+                        $statss = "IN";
+                        break;
+                    default:
+                        $statss = "IN";
+                }
+                //to create new entry in logs
+                Log::create([
+                    'uniq_id' => $request['code'],
+                    'time' => Carbon::now()->toTimeString(),
+                    'date' => Carbon::now()->toDateString(),
+                    'status' => $statss,
+                    'auth' => Auth::user()->name
+                ]);
+                $list = DB::table('visitors')->where('visitors.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
+                ->leftjoin('logs','visitors.uniq_id','=','logs.uniq_id')->first();
+                // dd($list);
 
-            //conditional empty statement for the 'STATUS' in logs.
-            if(empty($stats)){
-                $statss = "";
+
+            }else{
+                $stats = Log::orderBy('date','desc')->orderBy('time','desc')->where('uniq_id', $ress->rf_id)->first();
+
+
+                //conditional empty statement for the 'STATUS' in logs.
+                if(empty($stats)){
+                    $statss = "";
+                }
+                //this is the else statement.
+                else{
+                    $statss = $stats->status;
+                }
+                //conditional statement for the 'STATUS' in logs.
+                switch ($statss) {
+                    case "":
+                        $statss = "IN";
+                        break;
+                    case "IN":
+                        $statss = "OUT";
+                        break;
+                    case "OUT":
+                        $statss = "IN";
+                        break;
+                    default:
+                        $statss = "IN";
+                }
+                //to create new entry in logs
+                Log::create([
+                    'uniq_id' => $ress->rf_id,
+                    'time' => Carbon::now()->toTimeString(),
+                    'date' => Carbon::now()->toDateString(),
+                    'status' => $statss,
+                    'auth' => Auth::user()->name
+                ]);
+                $list = DB::table('person')->where('rf_id', $request['code'])->orwhere('person.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
+                ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
+
             }
-            //this is the else statement.
-            else{
-                $statss = $stats->status;
-            }
-            //conditional statement for the 'STATUS' in logs.
-            switch ($statss) {
-                case "":
-                    $statss = "IN";
-                    break;
-                case "IN":
-                    $statss = "OUT";
-                    break;
-                case "OUT":
-                    $statss = "IN";
-                    break;
-                default:
-                    $statss = "IN";
-            }
-            //to create new entry in logs
-            Log::create([
-                'uniq_id' => $ress->rf_id,
-                'time' => Carbon::now()->toTimeString(),
-                'date' => Carbon::now()->toDateString(),
-                'status' => $statss,
-                'auth' => Auth::user()->name
-            ]);
+
+
 
             //return the recent entered logs to the trace page
-            $list = DB::table('person')->where('rf_id', $request['code'])->orwhere('person.uniq_id', $request['code'])->orderBy('date','desc')->orderBy('time','desc')
-                    ->leftjoin('logs','person.rf_id','=','logs.uniq_id')->first();
             return view('tracing.scan', compact('list',$list));
         }
     }
@@ -235,17 +282,29 @@ class PersonController extends Controller
         //here is to keep the User logs private to the User only
         if($name_search == "" && $from == $now && $to == $now){
             // show all records
-            $list = DB::table('logs')->orderBy('logs.created_at', 'desc')
-            ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+            // $list = DB::table('logs')->orderBy('logs.created_at', 'desc')
+           // ->leftjoin('person','logs.uniq_id','=','person.rf_id')
+          //  ->leftjoin('visitors','logs.uniq_id','=','visitors.uniq_id')
+          // ->get();
+            // $list = DB::table('logs')->orderBy('logs.created_at', 'desc')
+            // ->get();
+            // dd($list);
         }elseif($name_search == ""){
             // filter by date
             $list = DB::table('logs')->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
-                ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+                ->leftjoin('person','logs.uniq_id','=','person.uniq_id')
+                ->leftjoin('visitors','logs.uniq_id','=','visitors.uniq_id')
+                ->get();
 
         }else{
             //filter by name and date
             $list = DB::table('logs')->where('person.first_name','LIKE',"%{$name_search}%")->orWhere('person.last_name','LIKE',"%{$name_search}%")->whereBetween('logs.date', [$from, $to])->orderBy('logs.created_at', 'desc')
-                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+                    ->leftjoin('person','logs.uniq_id','=','person.uniq_id')
+                    ->leftjoin('visitors','logs.uniq_id','=','visitors.uniq_id')
+                    ->get();
+
+
+
             if(sizeof($list) <=0)
             {
                 return redirect()->back()->withErrors('No record found. please input a valid name.');
@@ -266,7 +325,9 @@ class PersonController extends Controller
         $name = Auth::user()->name;
         //here is to keep the User logs private to the User only
         $list = DB::table('logs')->where('logs.auth',$name)->orderBy('logs.created_at', 'desc')
-                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')->get();
+                    ->leftjoin('person','logs.uniq_id','=','person.rf_id')
+
+                    ->get();
         view()->share('lists',$list);
         //sending variables to the pdf
         $pdf = PDF::loadview('pdf.logs',$list)->setPaper('Legal', 'landscape');

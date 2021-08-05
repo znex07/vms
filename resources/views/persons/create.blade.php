@@ -57,7 +57,6 @@
                             <div class="form-group float-left">
                                 <label for="level">Category:</label>
                                 <select id="level" name="level">
-                                    <option value="visitor">Visitor</option>
                                     <option value="tenant" selected>Tenant</option>
                                     <option value="employee">Employee</option>
                                     <option value="admin">Administrator</option>

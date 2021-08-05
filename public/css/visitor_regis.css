@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=STIX+Two+Math&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'STIX Two Math', serif;
+
+}
+
+
+form{
+
+
+    font-size: medium;
+    font-weight: bold;
+    color:black;
+
+
+    margin:0 auto;
+    padding:20px;
+
+
+  }
+
+
+h5{
+    text-align: center;
+    font-weight: bold;
+}
+#vis_regis{
+
+    background:linear-gradient(135deg, #71b7e6, #9b59b6);
+
+    border-radius: 25px 30px 60px;
+
+}
+#btn_regis_form{
+    width:100%;
+    margin-top: 5px;
+}
+
+
+.card{
+    background:linear-gradient(135deg, #71b7e6, #9b59b6);
+    color:black;
+    border-radius: 25px 25px  60px;
+}
+
+    .form-group{
+        font-size: large;
+        text-align:center;
+
+
+    }
+.form-group_label{
+    font-size: large;
+}
+
+
+
+
+
+
+
+
+
+
+.input-group {
+    margin-top:10px;
+    width:50%;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+label {
+    width:120px;
+    display:inline-block;
+    text-align: left;
+
+}
+
+
+  /* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+
+
+@media (min-width: 1200px) {
+    .container-xl-fluid {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 15px;
+      padding-left: 15px;
+      width: 100%;
+      max-width: none;
+    }
+  }

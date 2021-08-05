@@ -19,9 +19,9 @@
     <p><h3>{{Auth::user()->name}} Log Reports</h3> <br> 7461 Bagtikan Street, Makati City, Metro Manila, Philippines</p>
     <pre>This log report shouldn't be disclosed to the public as it contains personal information. Only to the eyes of the administrator.</pre>
     <br>
-    
-   
-    
+
+
+
     {{-- these are the reports showed on the pdf. --}}
     <table class="table table-bordered" style="width: 100%; text-align:center; border:1px solid black">
         <tr>
@@ -31,6 +31,7 @@
             <th>Address</th>
             <th>Email / Contact Number</th>
             <th>Status</th>
+            <th>Level</th>
         </tr>
         @foreach ($lists as $log)
         <tr>
@@ -40,6 +41,7 @@
             <td>{{$log->house_no}} {{$log->street}} {{$log->barangay}}</td>
             <td>{{$log->email}} / {{$log->contact_no}}</td>
             <td>{{$log->status}}</td>
+            <td>{{$log->level}}</td>
         </tr>
         @endforeach
     </table>

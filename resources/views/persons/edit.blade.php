@@ -11,7 +11,7 @@
             </div>
         </div>
     </div>
-   
+
     {{-- notify error if edit fails --}}
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -23,13 +23,13 @@
             </ul>
         </div>
     @endif
-  
+
     {{-- check web.php for the routes; trace it from there. --}}
     <form action="{{ route('persons.update',$person->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row justify-content-center">
-            
+
                 <div class="card">
                     <div class="card-header"> EDIT INDIVIDUAL </div>
                         <div class="card-body">
@@ -92,7 +92,7 @@
                                 </div><br><br>
                         </div>
                 </div>
-            
+
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Submit</button>

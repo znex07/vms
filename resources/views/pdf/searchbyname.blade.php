@@ -14,8 +14,8 @@
                         <button type="submit" class="btn btn-danger" id="s_search">Search</button>
                     </td>
                 <td>
-                       
-                        
+
+
                     </td>
                 </form>
             </tr>
@@ -43,7 +43,7 @@
     @if (empty($list))
     @else
     <div class="row">
-     
+
     </div>
     <img src="/{{$list->path}}" alt="" id="profile_pic" style="height:250px; width: 250px" srcset="" class="mb-1 img-thumbnail">
 

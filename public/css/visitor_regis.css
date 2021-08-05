@@ -3,7 +3,6 @@
     margin: 0;
     padding: 0;
     font-family: 'STIX Two Math', serif;
-
 }
 
 
@@ -75,7 +74,11 @@ label {
     width:120px;
     display:inline-block;
     text-align: left;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> c88014a122a49861116c1f70bce37afc79b1972e
 }
 
 
@@ -95,4 +98,8 @@ label {
       width: 100%;
       max-width: none;
     }
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> c88014a122a49861116c1f70bce37afc79b1972e
